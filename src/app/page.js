@@ -3,10 +3,11 @@
 import { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-);
+// Hardcode temporaire pour tester — remplace par tes vraies valeurs
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const WORKER_URL = process.env.NEXT_PUBLIC_WORKER_URL;
 
@@ -16,6 +17,7 @@ export default function Home() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const [copied, setCopied] = useState(false);
 
   const generateImage = (text) => {
@@ -37,9 +39,24 @@ export default function Home() {
     e.preventDefault();
     if (!email.trim()) return;
     setLoading(true);
-    const { error } = await supabase.from('waitlist').insert([{ email }]);
+    setError('');
+
+    const { error: insertError } = await supabase
+      .from('waitlist')
+      .insert([{ email: email.trim() }]);
+
     setLoading(false);
-    if (!error) setSubmitted(true);
+
+    if (insertError) {
+      // Si l'email existe déjà, on affiche "déjà inscrit"
+      if (insertError.code === '23505') {
+        setSubmitted(true);
+      } else {
+        setError(insertError.message);
+      }
+    } else {
+      setSubmitted(true);
+    }
   };
 
   const copyUrl = () => {
@@ -51,7 +68,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gray-950 text-white flex flex-col items-center justify-center px-4 py-16">
       <h1 className="text-5xl font-bold mb-4 text-center">
-        The cover image for your links
+        Never share a naked link again
       </h1>
       <p className="text-xl text-gray-400 mb-10 text-center max-w-xl">
         Type your title. Get a social preview image. In 3 seconds. No account needed.
@@ -90,7 +107,7 @@ export default function Home() {
           Free plan: 50 images/month. No credit card.
         </p>
         {submitted ? (
-          <p className="text-green-400 text-center text-lg">You&apos;re on the list ✓</p>
+          <p className="text-green-400 text-center text-lg">You're on the list ✓</p>
         ) : (
           <form onSubmit={handleSubmit} className="flex gap-3">
             <input
@@ -109,6 +126,9 @@ export default function Home() {
               {loading ? '...' : 'Notify me'}
             </button>
           </form>
+        )}
+        {error && (
+          <p className="text-red-400 text-center mt-3 text-sm">{error}</p>
         )}
       </div>
 
