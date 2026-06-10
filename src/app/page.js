@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+const WORKER_URL = 'https://linkcover-worker.linkcover.workers.dev';
 export default function Home() {
   const [title, setTitle] = useState('');
   const [imageUrl, setImageUrl] = useState('');
@@ -27,31 +28,35 @@ export default function Home() {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  if (!email.trim()) return;
-  setLoading(true);
-  setError('');
+    e.preventDefault();
+    if (!email.trim()) return;
+    setLoading(true);
+    setError('');
 
-  try {
-    const res = await fetch('/api/waitlist', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email.trim() }),
-    });
+    try {
+      const res = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim() }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (data.success) {
-      setSubmitted(true);
-    } else {
-      setError(data.error || 'Something went wrong');
+      if (data.success) {
+        if (data.alreadyExists) {
+          setError('This email is already on the list.');
+        } else {
+          setSubmitted(true);
+        }
+      } else {
+        setError(data.error || 'Something went wrong');
+      }
+    } catch (err) {
+      setError('Network error. Try again.');
     }
-  } catch (err) {
-    setError('Network error. Try again.');
-  }
 
-  setLoading(false);
-};
+    setLoading(false);
+  };
 
   const copyUrl = () => {
     navigator.clipboard.writeText(imageUrl);
