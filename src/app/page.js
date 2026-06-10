@@ -107,7 +107,7 @@ export default function Home() {
           Free plan: 50 images/month. No credit card.
         </p>
         {submitted ? (
-          <p className="text-green-400 text-center text-lg">You&apos;re on the list ✓</p>
+          <p className="text-green-400 text-center text-lg">You're on the list ✓</p>
         ) : (
           <form onSubmit={handleSubmit} className="flex gap-3">
             <input

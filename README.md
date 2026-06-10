@@ -1,37 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# LinkCover.xyz
 
-## Getting Started
+The cover image for your links. In 3 seconds. No account needed.
 
-First, run the development server:
+## What is LinkCover?
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+You share a link on Slack, Twitter, or Discord. It shows up naked — no preview, no image. Looks amateur.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+LinkCover generates social preview (OG) images instantly. Type your title, get your image, copy the URL. Done.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Live
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+[https://linkcover-landing.vercel.app](https://linkcover-landing.vercel.app)
 
-## Learn More
+## Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Frontend**: Next.js 14 + Tailwind CSS
+- **Image generation**: Cloudflare Workers (pure SVG, zero dependencies)
+- **Database**: Supabase (waitlist)
+- **Hosting**: Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Live preview as you type
+- No login required to test
+- Waitlist for early access
+- Free plan: 50 images/month
+- Paid plans: $7/mo (Solo), $19/mo (Pro)
 
-## Deploy on Vercel
+## Status
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Building in public. Currently in pre-launch.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# linkcover-landing
+- [x] Cloudflare Worker generating OG images
+- [x] Landing page with live preview
+- [x] Waitlist with Supabase
+- [ ] User auth + dashboard
+- [ ] Payments (Lemon Squeezy)
+- [ ] Share analytics
+
+## Author
+
+Built by [Hakim](https://github.com/HakimDev-tech) — solo founder, zero budget.
