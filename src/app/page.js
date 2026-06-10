@@ -103,9 +103,6 @@ export default function Home() {
       {/* Waitlist form */}
       <div className="w-full max-w-lg border-t border-gray-800 pt-10 mt-4">
         <h2 className="text-2xl font-semibold mb-2 text-center">Get notified at launch</h2>
-        <p className="text-gray-400 mb-6 text-center">
-          Free plan: 50 images/month. No credit card.
-        </p>
         {submitted ? (
           <p className="text-green-400 text-center text-lg">You&apos;re on the list ✓</p>
         ) : (
