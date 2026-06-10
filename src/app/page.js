@@ -87,15 +87,9 @@ export default function Home() {
 
       {imageUrl && (
         <div className="w-full max-w-lg mb-8">
-          <div className="rounded-xl overflow-hidden border border-gray-700 shadow-lg bg-white">
-            <object
-              data={imageUrl}
-              type="image/svg+xml"
-              className="w-full"
-              style={{ width: '100%', aspectRatio: '1200/630', display: 'block' }}
-            >
-              Your browser does not support SVG
-            </object>
+          <div className="rounded-xl overflow-hidden border border-gray-700 shadow-lg">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={imageUrl} alt="OG Preview" className="w-full h-auto" />
           </div>
           <button
             onClick={copyUrl}
@@ -139,9 +133,12 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <p className="mt-16 text-gray-600 text-sm">
-        © LinkCover.xyz — Built in public
-      </p>
+      <div className="mt-16 flex flex-col items-center gap-2 text-sm">
+        <a href="/login" className="text-purple-400 hover:text-purple-300">
+          Sign in
+        </a>
+        <span className="text-gray-600">© LinkCover.xyz — Built in public</span>
+      </div>
     </main>
   );
 }
