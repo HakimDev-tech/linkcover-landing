@@ -1,15 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
-
-// Hardcode temporaire pour tester — remplace par tes vraies valeurs
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-
-const WORKER_URL = process.env.NEXT_PUBLIC_WORKER_URL;
 
 export default function Home() {
   const [title, setTitle] = useState('');
