@@ -132,13 +132,9 @@ export default function Home() {
         )}
       </div>
 
-      {/* Footer */}
-      <div className="mt-16 flex flex-col items-center gap-2 text-sm">
-        <a href="/login" className="text-purple-400 hover:text-purple-300">
-          Sign in
-        </a>
-        <span className="text-gray-600">© LinkCover.xyz — Built in public</span>
-      </div>
+      <p className="mt-16 text-gray-600 text-sm">
+        © LinkCover.xyz — Built in public
+      </p>
     </main>
   );
 }
