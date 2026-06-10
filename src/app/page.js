@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 const WORKER_URL = 'https://linkcover-worker.linkcover.workers.dev';
+
 export default function Home() {
   const [title, setTitle] = useState('');
   const [imageUrl, setImageUrl] = useState('');
@@ -43,7 +44,7 @@ export default function Home() {
       const data = await res.json();
 
       if (data.success) {
-        if (data.alreadyExists) {
+        if (data.message === 'already_registered') {
           setError('This email is already on the list.');
         } else {
           setSubmitted(true);
@@ -86,9 +87,15 @@ export default function Home() {
 
       {imageUrl && (
         <div className="w-full max-w-lg mb-8">
-          <div className="rounded-xl overflow-hidden border border-gray-700 shadow-lg">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={imageUrl} alt="OG Preview" className="w-full h-auto" />
+          <div className="rounded-xl overflow-hidden border border-gray-700 shadow-lg bg-white">
+            <object
+              data={imageUrl}
+              type="image/svg+xml"
+              className="w-full"
+              style={{ width: '100%', aspectRatio: '1200/630', display: 'block' }}
+            >
+              Your browser does not support SVG
+            </object>
           </div>
           <button
             onClick={copyUrl}
