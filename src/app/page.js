@@ -36,28 +36,31 @@ export default function Home() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!email.trim()) return;
-    setLoading(true);
-    setError('');
+  e.preventDefault();
+  if (!email.trim()) return;
+  setLoading(true);
+  setError('');
 
-    const { error: insertError } = await supabase
-      .from('waitlist')
-      .insert([{ email: email.trim() }]);
+  try {
+    const res = await fetch('/api/waitlist', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email.trim() }),
+    });
 
-    setLoading(false);
+    const data = await res.json();
 
-    if (insertError) {
-      // Si l'email existe déjà, on affiche "déjà inscrit"
-      if (insertError.code === '23505') {
-        setSubmitted(true);
-      } else {
-        setError(insertError.message);
-      }
-    } else {
+    if (data.success) {
       setSubmitted(true);
+    } else {
+      setError(data.error || 'Something went wrong');
     }
-  };
+  } catch (err) {
+    setError('Network error. Try again.');
+  }
+
+  setLoading(false);
+};
 
   const copyUrl = () => {
     navigator.clipboard.writeText(imageUrl);
@@ -107,7 +110,7 @@ export default function Home() {
           Free plan: 50 images/month. No credit card.
         </p>
         {submitted ? (
-          <p className="text-green-400 text-center text-lg">You're on the list ✓</p>
+          <p className="text-green-400 text-center text-lg">You&apos;re on the list ✓</p>
         ) : (
           <form onSubmit={handleSubmit} className="flex gap-3">
             <input
