@@ -7,16 +7,13 @@ const LEMON_SQUEEZY_URL = 'https://linkcover.lemonsqueezy.com/checkout/buy/ec760
 
 export default function Home() {
   const [title, setTitle] = useState('');
+  const [siteUrl, setSiteUrl] = useState('');
   const [template, setTemplate] = useState('dark');
   const [copied, setCopied] = useState(false);
 
   const imageUrl = title.trim()
-    ? `${WORKER_URL}/?title=${encodeURIComponent(title)}&template=${template}`
+    ? `${WORKER_URL}/?title=${encodeURIComponent(title)}&template=${template}&url=${encodeURIComponent(siteUrl || 'yoursite.com/blog')}`
     : '';
-
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
-  };
 
   const copyUrl = () => {
     navigator.clipboard.writeText(imageUrl);
@@ -34,7 +31,7 @@ export default function Home() {
       </p>
 
       {/* Template selector */}
-      <div className="flex gap-3 justify-center mb-4">
+      <div className="flex gap-3 justify-center mb-6">
         {['dark', 'light', 'brand'].map((t) => (
           <button
             key={t}
@@ -51,13 +48,24 @@ export default function Home() {
       </div>
 
       {/* Title input */}
-      <div className="w-full max-w-lg mb-4">
+      <div className="w-full max-w-lg mb-2">
         <input
           type="text"
           value={title}
-          onChange={handleTitleChange}
+          onChange={(e) => setTitle(e.target.value)}
           placeholder="e.g. How I Built a SaaS in 7 Days"
           className="w-full px-5 py-4 rounded-xl bg-gray-800 border border-gray-700 text-white text-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+        />
+      </div>
+
+      {/* URL input */}
+      <div className="w-full max-w-lg mb-4">
+        <input
+          type="text"
+          value={siteUrl}
+          onChange={(e) => setSiteUrl(e.target.value)}
+          placeholder="yourwebsite.com/blog (optional)"
+          className="w-full px-5 py-3 rounded-xl bg-gray-800 border border-gray-700 text-white text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
         />
       </div>
 
@@ -90,8 +98,8 @@ export default function Home() {
             <li>✓ 500 images/month</li>
             <li>✓ No watermark</li>
             <li>✓ Dark, Light & Brand templates</li>
+            <li>✓ Custom URL in preview</li>
             <li>✓ Share analytics (coming soon)</li>
-            <li>✓ Priority support</li>
           </ul>
           <a
             href={LEMON_SQUEEZY_URL}
