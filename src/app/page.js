@@ -3,60 +3,19 @@
 import { useState } from 'react';
 
 const WORKER_URL = 'https://linkcover-worker.linkcover.workers.dev';
+const LEMON_SQUEEZY_URL = 'https://[TON-USERNAME].lemonsqueezy.com/checkout/buy/[PRODUCT-ID]?discount=LAUNCH50';
 
 export default function Home() {
   const [title, setTitle] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
-  const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [template, setTemplate] = useState('dark');
   const [copied, setCopied] = useState(false);
 
-  const generateImage = (text) => {
-    if (!text.trim()) {
-      setImageUrl('');
-      return;
-    }
-    const encoded = encodeURIComponent(text);
-    setImageUrl(`${WORKER_URL}/?title=${encoded}`);
-  };
+  const imageUrl = title.trim()
+    ? `${WORKER_URL}/?title=${encodeURIComponent(title)}&template=${template}`
+    : '';
 
   const handleTitleChange = (e) => {
-    const val = e.target.value;
-    setTitle(val);
-    generateImage(val);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!email.trim()) return;
-    setLoading(true);
-    setError('');
-
-    try {
-      const res = await fetch('/api/waitlist', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email.trim() }),
-      });
-
-      const data = await res.json();
-
-      if (data.success) {
-        if (data.message === 'already_registered') {
-          setError('This email is already on the list.');
-        } else {
-          setSubmitted(true);
-        }
-      } else {
-        setError(data.error || 'Something went wrong');
-      }
-    } catch (err) {
-      setError('Network error. Try again.');
-    }
-
-    setLoading(false);
+    setTitle(e.target.value);
   };
 
   const copyUrl = () => {
@@ -71,10 +30,27 @@ export default function Home() {
         Never share a naked link again
       </h1>
       <p className="text-xl text-gray-400 mb-10 text-center max-w-xl">
-        Type your title. Get a social preview image. In 3 seconds. No account needed.
+        Type your title. Get a social preview image. In 3 seconds.
       </p>
 
-      {/* Live Preview */}
+      {/* Template selector */}
+      <div className="flex gap-3 justify-center mb-4">
+        {['dark', 'light', 'brand'].map((t) => (
+          <button
+            key={t}
+            onClick={() => setTemplate(t)}
+            className={`px-4 py-1 rounded-full text-sm capitalize font-medium transition ${
+              template === t
+                ? 'bg-purple-600 text-white'
+                : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+            }`}
+          >
+            {t}
+          </button>
+        ))}
+      </div>
+
+      {/* Title input */}
       <div className="w-full max-w-lg mb-4">
         <input
           type="text"
@@ -85,6 +61,7 @@ export default function Home() {
         />
       </div>
 
+      {/* Live preview */}
       {imageUrl && (
         <div className="w-full max-w-lg mb-8">
           <div className="rounded-xl overflow-hidden border border-gray-700 shadow-lg">
@@ -100,35 +77,42 @@ export default function Home() {
         </div>
       )}
 
-      {/* Waitlist form */}
+      {/* Pricing CTA */}
       <div className="w-full max-w-lg border-t border-gray-800 pt-10 mt-4">
-        <h2 className="text-2xl font-semibold mb-2 text-center">Get notified at launch</h2>
-        {submitted ? (
-          <p className="text-green-400 text-center text-lg">You&apos;re on the list ✓</p>
-        ) : (
-          <form onSubmit={handleSubmit} className="flex gap-3">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="your@email.com"
-              required
-              className="flex-1 px-4 py-3 rounded-xl bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
-            />
-            <button
-              type="submit"
-              disabled={loading}
-              className="px-6 py-3 bg-purple-600 hover:bg-purple-500 rounded-xl font-semibold transition disabled:opacity-50"
-            >
-              {loading ? '...' : 'Notify me'}
-            </button>
-          </form>
-        )}
-        {error && (
-          <p className="text-red-400 text-center mt-3 text-sm">{error}</p>
-        )}
+        <div className="bg-gray-900 rounded-xl p-6 mb-4">
+          <div className="flex justify-between items-center mb-4">
+            <span className="text-lg font-semibold">LinkCover Solo</span>
+            <span className="text-2xl font-bold">
+              $7<span className="text-lg text-gray-400">/mo</span>
+            </span>
+          </div>
+          <ul className="text-gray-400 space-y-2 mb-6 text-sm">
+            <li>✓ 500 images/month</li>
+            <li>✓ No watermark</li>
+            <li>✓ Dark, Light & Brand templates</li>
+            <li>✓ Share analytics (coming soon)</li>
+            <li>✓ Priority support</li>
+          </ul>
+          <a
+            href={LEMON_SQUEEZY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block w-full py-3 bg-purple-600 hover:bg-purple-500 rounded-xl font-semibold text-center transition"
+          >
+            Get LinkCover — $7/month
+          </a>
+          <p className="text-gray-500 text-xs text-center mt-3">
+            First 10 customers: 50% off with code{' '}
+            <span className="text-purple-400">LAUNCH50</span>
+          </p>
+        </div>
+
+        <p className="text-gray-500 text-sm text-center">
+          Free preview above. No signup required.
+        </p>
       </div>
 
+      {/* Footer */}
       <p className="mt-16 text-gray-600 text-sm">
         © LinkCover.xyz — Built in public
       </p>
