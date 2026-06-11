@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 const WORKER_URL = 'https://linkcover-worker.linkcover.workers.dev';
-const LEMON_SQUEEZY_URL = 'https://linkcover.lemonsqueezy.com/checkout/buy/ec760cbe-a2a4-4e76-81f4-df41a6dc0ec2?discount=LAUNCH50';
+const LEMON_SQUEEZY_URL = 'https://linkcover.lemonsqueezy.com/checkout/buy/ec760cbe-a2a4-4e76-81f4-df41a6dc0ec2';
 
 export default function Home() {
   const [title, setTitle] = useState('');
@@ -110,8 +110,7 @@ export default function Home() {
             Get LinkCover — $7/month
           </a>
           <p className="text-gray-500 text-xs text-center mt-3">
-            First 10 customers: 50% off with code{' '}
-            <span className="text-purple-400">LAUNCH50</span>
+            Cancel anytime. No questions asked.
           </p>
         </div>
 
