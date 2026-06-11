@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 const WORKER_URL = 'https://linkcover-worker.linkcover.workers.dev';
-const LEMON_SQUEEZY_URL = 'https://[TON-USERNAME].lemonsqueezy.com/checkout/buy/[PRODUCT-ID]?discount=LAUNCH50';
+const LEMON_SQUEEZY_URL = 'https://linkcover.lemonsqueezy.com/checkout/buy/ec760cbe-a2a4-4e76-81f4-df41a6dc0ec2?discount=LAUNCH50';
 
 export default function Home() {
   const [title, setTitle] = useState('');
