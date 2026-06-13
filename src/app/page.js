@@ -86,39 +86,71 @@ export default function Home() {
       )}
 
       {/* Pricing CTA */}
-      <div className="w-full max-w-lg border-t border-gray-800 pt-10 mt-4">
-        <div className="bg-gray-900 rounded-xl p-6 mb-4">
-          <div className="flex justify-between items-center mb-4">
-            <span className="text-lg font-semibold">LinkCover Solo</span>
-            <span className="text-2xl font-bold">
-              $7<span className="text-lg text-gray-400">/mo</span>
-            </span>
-          </div>
-          <ul className="text-gray-400 space-y-2 mb-6 text-sm">
-            <li>✓ 500 images/month</li>
-            <li>✓ No watermark</li>
-            <li>✓ Dark, Light & Brand templates</li>
-            <li>✓ Custom URL in preview</li>
-            <li>✓ Share analytics (coming soon)</li>
-          </ul>
-          <a
-            href={LEMON_SQUEEZY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block w-full py-3 bg-purple-600 hover:bg-purple-500 rounded-xl font-semibold text-center transition"
-          >
-            Get LinkCover — $7/month
-          </a>
-          <p className="text-gray-500 text-xs text-center mt-3">
-            Cancel anytime. No questions asked.
-          </p>
-        </div>
+<div className="w-full max-w-lg border-t border-gray-800 pt-10 mt-4">
+  <h2 className="text-2xl font-semibold mb-2 text-center">
+    Upgrade to unlock
+  </h2>
+  <p className="text-gray-400 mb-6 text-center">
+    Free preview above. No signup required.
+  </p>
 
-        <p className="text-gray-500 text-sm text-center">
-          Free preview above. No signup required.
-        </p>
+  {/* Option 1 : One-shot */}
+  <div className="bg-gray-900 rounded-xl p-6 mb-4 border border-purple-500/30">
+    <div className="flex justify-between items-center mb-4">
+      <div>
+        <span className="text-lg font-semibold">Lifetime Access</span>
+        <span className="text-xs bg-purple-600 text-white px-2 py-0.5 rounded-full ml-2">Popular</span>
       </div>
+      <span className="text-2xl font-bold">
+        $9<span className="text-lg text-gray-400"> once</span>
+      </span>
+    </div>
+    <ul className="text-gray-400 space-y-2 mb-6 text-sm">
+      <li>✓ 500 images — forever</li>
+      <li>✓ No watermark</li>
+      <li>✓ Dark, Light & Brand templates</li>
+      <li>✓ Custom URL in preview</li>
+      <li>✓ Pay once, use forever</li>
+    </ul>
+    <a
+      href="[LIEN_LEMON_SQUEEZY_ONE_SHOT]"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block w-full py-3 bg-purple-600 hover:bg-purple-500 rounded-xl font-semibold text-center transition"
+    >
+      Get Lifetime Access — $9
+    </a>
+  </div>
 
+  {/* Option 2 : Abonnement */}
+  <div className="bg-gray-900 rounded-xl p-6 mb-4">
+    <div className="flex justify-between items-center mb-4">
+      <span className="text-lg font-semibold">LinkCover Solo</span>
+      <span className="text-2xl font-bold">
+        $7<span className="text-lg text-gray-400">/mo</span>
+      </span>
+    </div>
+    <ul className="text-gray-400 space-y-2 mb-6 text-sm">
+      <li>✓ 500 images/month</li>
+      <li>✓ No watermark</li>
+      <li>✓ Dark, Light & Brand templates</li>
+      <li>✓ Custom URL in preview</li>
+      <li>✓ Cancel anytime</li>
+    </ul>
+    <a
+      href={LEMON_SQUEEZY_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block w-full py-3 bg-gray-700 hover:bg-gray-600 rounded-xl font-semibold text-center transition"
+    >
+      Subscribe — $7/month
+    </a>
+  </div>
+
+  <p className="text-gray-500 text-xs text-center mt-3">
+    Cancel anytime. No questions asked.
+  </p>
+</div>
       {/* Footer */}
       <p className="mt-16 text-gray-600 text-sm">
         © LinkCover.xyz — Built in public
