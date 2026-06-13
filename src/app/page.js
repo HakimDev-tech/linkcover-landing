@@ -113,7 +113,7 @@ export default function Home() {
       <li>✓ Pay once, use forever</li>
     </ul>
     <a
-      href="[LIEN_LEMON_SQUEEZY_ONE_SHOT]"
+      href={LEMON_SQUEEZY_URL}
       target="_blank"
       rel="noopener noreferrer"
       className="block w-full py-3 bg-purple-600 hover:bg-purple-500 rounded-xl font-semibold text-center transition"
