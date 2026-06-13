@@ -4,8 +4,7 @@ import { useState } from 'react';
 
 const WORKER_URL = 'https://linkcover-worker.linkcover.workers.dev';
 const LEMON_SQUEEZY_URL = 'https://linkcover.lemonsqueezy.com/checkout/buy/ec760cbe-a2a4-4e76-81f4-df41a6dc0ec2';
-
-export default function Home() {
+const LEMON_SQUEEZY_LIFETIME_URL = 'https://linkcover.lemonsqueezy.com/checkout/buy/ad14fdcb-85c8-450f-91c7-d055f4733444';export default function Home() {
   const [title, setTitle] = useState('');
   const [siteUrl, setSiteUrl] = useState('');
   const [template, setTemplate] = useState('dark');
@@ -113,7 +112,7 @@ export default function Home() {
       <li>✓ Pay once, use forever</li>
     </ul>
     <a
-      href={LEMON_SQUEEZY_URL}
+      href={LEMON_SQUEEZY_LIFETIME_URL}
       target="_blank"
       rel="noopener noreferrer"
       className="block w-full py-3 bg-purple-600 hover:bg-purple-500 rounded-xl font-semibold text-center transition"
